@@ -4,3 +4,72 @@
   height: 250px;
   margin: 10px;
 }
+
+/* Chip */
+
+.card-chip {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+}
+
+.chip-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Card Number */
+
+.card-number {
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.card-number-one {
+  flex: 1;
+  /* align-items: center; */
+  text-align: center;
+}
+
+/* Card Name and Expiring date */
+
+.card-name-expires {
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+}
+
+.card-user {
+  flex: 1;
+  /* align-items: center; */
+  text-align: center;
+}
+
+.card-expiration {
+  flex: 1;
+  /* align-items: center; */
+  text-align: center;
+}
+
+/* Add card */
+
+.add-card-container {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 250px;
+  background-color: gray;
+}
+
+.plus-image {
+  width: 25%;
+  height: 25%;
+  position: center;
+  object-fit: contain;
+  /* margin: auto;
+  justify-content: center; */
+}

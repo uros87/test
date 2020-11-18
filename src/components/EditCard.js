@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import chipImage from '../img/chip.png';
 
 const EditCard = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -9,6 +10,7 @@ const EditCard = ({ location, history }) => {
   const [expiresOn, setExpiresOn] = useState('');
   const [id, setId] = useState('');
   const [cards, setCards] = useState([]);
+  const [cardType, setCardType] = useState('');
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const EditCard = ({ location, history }) => {
       cardPartThree,
       cardPartFour,
       expiresOn,
+      cardType,
       id,
     };
 
@@ -46,85 +49,127 @@ const EditCard = ({ location, history }) => {
     setCardPartFour(location.state.card.cardPartFour);
     setExpiresOn(location.state.card.expiresOn);
     setId(location.state.card.id);
+    setCardType(location.state.card.cardType);
   }, []);
+
+  const typesOfCards = ['visa', 'master', 'discover'];
+
+  const changeTypeOfCard = () => {
+    setCardType(typesOfCards[whichCard()]);
+  };
+
+  const whichCard = () => {
+    let num = typesOfCards.indexOf(cardType);
+
+    if (typesOfCards.indexOf(cardType) <= 1) {
+      num++;
+    } else if (typesOfCards.indexOf(cardType) === 2) {
+      num = 0;
+    }
+
+    return num;
+  };
 
   return (
     <div>
-      <form
-        onSubmit={submitHandler}
-        className="form"
-        enctype="multipart/form-data"
-      >
-        <div>
-          <label></label>
-          <input
-            type="text"
-            placeholder="name"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="input"
-          />
+      <div className="card-container">
+        <div className="card-type">
+          <div>
+            <button onClick={changeTypeOfCard}>{cardType}</button>
+          </div>
+        </div>
+        <div className="card-chip">
+          <img src={chipImage} alt="image" className="chip-image" />
         </div>
         <div className="card-number">
-          <div>
-            <label></label>
-            <input
-              type="number"
-              placeholder=""
-              name="cardPartOne"
-              value={cardPartOne}
-              onChange={(e) => setCardPartOne(e.target.value)}
-              className="input"
-            />
-          </div>
-          <div>
-            <label></label>
-            <input
-              type="number"
-              placeholder=""
-              name="cardPartTwo"
-              value={cardPartTwo}
-              onChange={(e) => setCardPartTwo(e.target.value)}
-              className="input"
-            />
-          </div>
-          <div>
-            <label></label>
-            <input
-              type="number"
-              placeholder=""
-              name="cardPartThree"
-              value={cardPartThree}
-              onChange={(e) => setCardPartThree(e.target.value)}
-              className="input"
-            />
-          </div>
-          <div>
-            <label></label>
-            <input
-              type="number"
-              placeholder=""
-              name="cardPartFour"
-              value={cardPartFour}
-              onChange={(e) => setCardPartFour(e.target.value)}
-              className="input"
-            />
-          </div>
-          <div>
-            <label></label>
-            <input
-              type="date"
-              placeholder=""
-              name="expiresOn"
-              value={expiresOn}
-              onChange={(e) => setExpiresOn(e.target.value)}
-              className="input"
-            />
-          </div>
+          <div className="card-number-one">{cardPartOne}</div>
+          <div className="card-number-one">{cardPartTwo}</div>
+          <div className="card-number-one">{cardPartThree}</div>
+          <div className="card-number-one">{cardPartFour}</div>
         </div>
-        <button type="submit">Save</button>
-      </form>
+        <div className="card-name-expires">
+          <div className="card-user">{name}</div>
+          <div className="card-expiration">{expiresOn}</div>
+        </div>
+      </div>
+
+      <div className="form-container">
+        <form
+          onSubmit={submitHandler}
+          className="form"
+          enctype="multipart/form-data"
+        >
+          <div>
+            <label></label>
+            <input
+              type="text"
+              placeholder="name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="input"
+            />
+          </div>
+          <div className="card-number">
+            <div>
+              <label></label>
+              <input
+                type="number"
+                placeholder=""
+                name="cardPartOne"
+                value={cardPartOne}
+                onChange={(e) => setCardPartOne(e.target.value)}
+                className="input"
+              />
+            </div>
+            <div>
+              <label></label>
+              <input
+                type="number"
+                placeholder=""
+                name="cardPartTwo"
+                value={cardPartTwo}
+                onChange={(e) => setCardPartTwo(e.target.value)}
+                className="input"
+              />
+            </div>
+            <div>
+              <label></label>
+              <input
+                type="number"
+                placeholder=""
+                name="cardPartThree"
+                value={cardPartThree}
+                onChange={(e) => setCardPartThree(e.target.value)}
+                className="input"
+              />
+            </div>
+            <div>
+              <label></label>
+              <input
+                type="number"
+                placeholder=""
+                name="cardPartFour"
+                value={cardPartFour}
+                onChange={(e) => setCardPartFour(e.target.value)}
+                className="input"
+              />
+            </div>
+            <div>
+              <label></label>
+              <input
+                type="date"
+                placeholder=""
+                name="expiresOn"
+                value={expiresOn}
+                onChange={(e) => setExpiresOn(e.target.value)}
+                className="input"
+              />
+            </div>
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </div>
     </div>
   );
 };
