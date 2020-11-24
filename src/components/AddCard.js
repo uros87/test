@@ -6,10 +6,12 @@ import chipImage from '../img/chip.png';
 const AddCard = ({ history }) => {
   const [name, setName] = useState('');
   const [cardPartOne, setCardPartOne] = useState('');
+  const [cardPartOneError, setCardPartOneError] = useState('');
   const [cardPartTwo, setCardPartTwo] = useState('');
   const [cardPartThree, setCardPartThree] = useState('');
   const [cardPartFour, setCardPartFour] = useState('');
   const [expiresOn, setExpiresOn] = useState('');
+  const [expiresOnError, setExpiresOnError] = useState('');
   const [cardType, setCardType] = useState('visa');
   const [cards, setCards] = useState([]);
 
@@ -58,8 +60,36 @@ const AddCard = ({ history }) => {
     return num;
   };
 
+  const validateCardNumber = (value) => {
+    let regex = /^[4-6]\d{3}$/g;
+
+    setCardPartOne(value);
+
+    if (!regex.test(value)) {
+      setCardPartOneError('Wrong card number');
+    } else {
+      setCardPartOneError('');
+    }
+  };
+
+  const validateDate = (value) => {
+    setExpiresOn(value);
+    console.log(value);
+    if (new Date(value) <= Date.now()) {
+      setExpiresOnError('Wrong date');
+    } else {
+      setExpiresOnError('');
+    }
+  };
+
+  const focusElement = (e) => {
+    let nameOfClass = e.target.className.split(' ')[1];
+
+    document.getElementsByClassName(nameOfClass)[1].focus();
+  };
+
   return (
-    <div>
+    <div className="main-container">
       <div className="card-container">
         <div className="card-type">
           <div>
@@ -70,14 +100,41 @@ const AddCard = ({ history }) => {
           <img src={chipImage} alt="image" className="chip-image" />
         </div>
         <div className="card-number">
-          <div className="card-number-one">{cardPartOne}</div>
-          <div className="card-number-one">{cardPartTwo}</div>
-          <div className="card-number-one">{cardPartThree}</div>
-          <div className="card-number-one">{cardPartFour}</div>
+          <div
+            className="card-number-one number-one"
+            onClick={(e) => focusElement(e)}
+          >
+            {cardPartOne}
+          </div>
+          <div
+            className="card-number-two number-two"
+            onClick={(e) => focusElement(e)}
+          >
+            {cardPartTwo}
+          </div>
+          <div
+            className="card-number-three number-three"
+            onClick={(e) => focusElement(e)}
+          >
+            {cardPartThree}
+          </div>
+          <div
+            className="card-number-four number-four"
+            onClick={(e) => focusElement(e)}
+          >
+            {cardPartFour}
+          </div>
         </div>
         <div className="card-name-expires">
-          <div className="card-user">{name}</div>
-          <div className="card-expiration">{expiresOn}</div>
+          <div className="card-user name" onClick={(e) => focusElement(e)}>
+            {name}
+          </div>
+          <div
+            className="card-expiration expiration"
+            onClick={(e) => focusElement(e)}
+          >
+            {expiresOn}
+          </div>
         </div>
       </div>
       <div className="form-container">
@@ -86,75 +143,90 @@ const AddCard = ({ history }) => {
           className="form"
           enctype="multipart/form-data"
         >
-          <div>
-            <label></label>
-            <input
-              type="text"
-              placeholder="name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="input"
-            />
+          <div className="input-container">
+            <div className="">
+              <label></label>
+              <input
+                type="text"
+                placeholder="name"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="input name"
+              />
+            </div>
+            <div className="card-whole-number">
+              <div>
+                <label></label>
+                <input
+                  type="text"
+                  placeholder=""
+                  name="cardPartOne"
+                  value={cardPartOne}
+                  maxLength="4"
+                  onChange={(e) => validateCardNumber(e.target.value)}
+                  className="input number-one"
+                />
+                <div>{cardPartOneError}</div>
+              </div>
+              <div>
+                <label></label>
+                <input
+                  type="text"
+                  placeholder=""
+                  maxLength="4"
+                  name="cardPartTwo"
+                  value={cardPartTwo}
+                  onChange={(e) => setCardPartTwo(e.target.value)}
+                  className="input number-two"
+                />
+              </div>
+              <div>
+                <label></label>
+                <input
+                  type="text"
+                  placeholder=""
+                  maxLength="4"
+                  name="cardPartThree"
+                  value={cardPartThree}
+                  onChange={(e) => setCardPartThree(e.target.value)}
+                  className="input number-three"
+                />
+              </div>
+              <div>
+                <label></label>
+                <input
+                  type="text"
+                  placeholder=""
+                  maxLength="4"
+                  name="cardPartFour"
+                  value={cardPartFour}
+                  onChange={(e) => setCardPartFour(e.target.value)}
+                  className="input number-four"
+                />
+              </div>
+            </div>
+            <div>
+              <div>
+                <label></label>
+                <input
+                  type="date"
+                  placeholder=""
+                  name="expiresOn"
+                  value={expiresOn}
+                  onChange={(e) => validateDate(e.target.value)}
+                  className="input expiration"
+                />
+              </div>
+              <div>{expiresOnError}</div>
+            </div>
+            <button
+              type="submit"
+              disabled={cardPartOneError || expiresOnError ? true : false}
+            >
+              Save
+            </button>
           </div>
-          <div className="">
-            <div>
-              <label></label>
-              <input
-                type="number"
-                placeholder=""
-                name="cardPartOne"
-                value={cardPartOne}
-                onChange={(e) => setCardPartOne(e.target.value)}
-                className="input"
-              />
-            </div>
-            <div>
-              <label></label>
-              <input
-                type="number"
-                placeholder=""
-                name="cardPartTwo"
-                value={cardPartTwo}
-                onChange={(e) => setCardPartTwo(e.target.value)}
-                className="input"
-              />
-            </div>
-            <div>
-              <label></label>
-              <input
-                type="number"
-                placeholder=""
-                name="cardPartThree"
-                value={cardPartThree}
-                onChange={(e) => setCardPartThree(e.target.value)}
-                className="input"
-              />
-            </div>
-            <div>
-              <label></label>
-              <input
-                type="number"
-                placeholder=""
-                name="cardPartFour"
-                value={cardPartFour}
-                onChange={(e) => setCardPartFour(e.target.value)}
-                className="input"
-              />
-            </div>
-            <div>
-              <label></label>
-              <input
-                type="date"
-                placeholder=""
-                name="expiresOn"
-                value={expiresOn}
-                onChange={(e) => setExpiresOn(e.target.value)}
-                className="input"
-              />
-            </div>
-          </div>
-          <button type="submit">Save</button>
         </form>
       </div>
     </div>

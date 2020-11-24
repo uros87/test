@@ -1,8 +1,18 @@
+/* Main container */
+
+.main-container {
+  width: 960px;
+  margin: auto;
+}
+
+/*    CARD      */
+
 .card-container {
   width: 400px;
   background-color: gray;
   height: 250px;
-  margin: 10px;
+  margin: 10px auto;
+  border-radius: 15px;
 }
 
 /* Chip */
@@ -19,40 +29,46 @@
   object-fit: contain;
 }
 
+/* Input */
+
+.input {
+  width: 400px;
+  height: 38px;
+}
+
+/* INPUT PART */
+
 /* Card Number */
 
-.card-number {
-  width: 100%;
+/* Input container */
+
+.input-container {
   display: flex;
-  align-content: space-between;
-  /* align-items: center; */
-  /* justify-content: center; */
+  width: 400px;
+  flex-direction: column;
+  margin: auto;
 }
 
-.card-number-one {
-  flex: 1;
-  /* align-items: center; */
-  text-align: center;
+.input-container div {
+  margin: 0 auto;
+  /* flex: 1; */
 }
 
-/* Card Name and Expiring date */
-
-.card-name-expires {
-  width: 100%;
+.card-whole-number {
+  width: 400px;
   display: flex;
-  align-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.card-user {
-  flex: 1;
-  /* align-items: center; */
-  text-align: center;
+.card-whole-number div {
+  /* width: 400px; */
+  /* flex: 1 */
 }
 
-.card-expiration {
-  flex: 1;
-  /* align-items: center; */
-  text-align: center;
+.card-whole-number input {
+  width: 80px;
+  /* flex: 1 */
 }
 
 /* Add card */
@@ -70,6 +86,4 @@
   height: 25%;
   position: center;
   object-fit: contain;
-  /* margin: auto;
-  justify-content: center; */
 }
