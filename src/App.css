@@ -1,3 +1,10 @@
+/* Cards-container */
+
+.main-page {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr)
+}
+
 /* Main container */
 
 .main-container {
@@ -39,6 +46,24 @@
 /* INPUT PART */
 
 /* Card Number */
+
+.card-number {
+  margin: 30px 0;
+  display: flex;
+}
+
+.card-number-part {
+  margin: 0 auto
+}
+
+/* Card name - expires */
+
+.card-name-expires {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
+  /* align-items: flex-end; */
+}
 
 /* Input container */
 
@@ -86,4 +111,11 @@
   height: 25%;
   position: center;
   object-fit: contain;
+}
+
+/* Edit */
+
+.edit a {
+  text-decoration: none;
+  color: black
 }

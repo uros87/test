@@ -113,25 +113,25 @@ const EditCard = ({ location, history }) => {
         </div>
         <div className="card-number">
           <div
-            className="card-number-one number-one"
+            className="card-number-part card-number-one number-one"
             onClick={(e) => focusElement(e)}
           >
             {cardPartOne}
           </div>
           <div
-            className="card-number-two number-two"
+            className="card-number-part card-number-two number-two"
             onClick={(e) => focusElement(e)}
           >
             {cardPartTwo}
           </div>
           <div
-            className="card-number-three number-three"
+            className="card-number-part card-number-three number-three"
             onClick={(e) => focusElement(e)}
           >
             {cardPartThree}
           </div>
           <div
-            className="card-number-four number-four"
+            className="card-number-part card-number-four number-four"
             onClick={(e) => focusElement(e)}
           >
             {cardPartFour}
